@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSpForum</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/newsstyle.css">
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<%if(darkTema){%>
+  <body class="dark">
+  <%}%>
+  <%if(!darkTema){%>
+    <body>
+    <%}%>
+  <!-- Page Preloder -->
+ <div id="preloder">
+  <div class="loader"></div>
+</div>
+
+<!-- header2 -->
+
+<div class="sidebar">
+  <div class="sidebar-brand">
+      <!-- <i class='bx bx-menu' id="btn" ></i> -->
+      <i class='bx bx-chevron-right toggle'></i>
+  </div>
+
+  <ul class="sidebar-list">
+    
+      <li>
+          <a href="/profile">
+            <i class='bx bx-user'></i>
+              <span class="sidebar-link-name">Профиль</span>
+          </a>
+              <span class="tooltip">Профиль</span>
+      </li>
+
+      <li>
+        <a href="/">
+              <i class='bx bx-home-alt'></i>
+              <span class="sidebar-link-name">Главная</span>
+          </a>
+          <span class="tooltip">Главная</span>
+      </li>
+
+      <li>
+          <a href="/categorys">
+              <i class='bx bx-news' ></i>
+              <span class="sidebar-link-name">Категории</span>
+          </a>
+          <span class="tooltip">Категории</span>
+      </li>
+
+      <li>
+          <a href="/">
+              <i class='bx bx-phone' ></i>
+              <span class="sidebar-link-name">О нас</span>
+          </a>
+          <span class="tooltip">О нас</span>
+      </li>
+
+
+      <li>
+        <a href="mypost.html">
+            <i class='bx bx-edit-alt'></i>
+            <span class="sidebar-link-name">Ваши новости</span>
+        </a>
+        <span class="tooltip">Ваши новости</span>
+    </li>
+
+      <li>
+          <a href="/addpost">
+              <i class='bx bx-plus-circle' ></i>
+              <span class="sidebar-link-name">Создать новость</span>
+          </a>
+          <span class="tooltip">Создать новость</span>
+      </li>
+     
+
+
+      <div class="bottom-content">
+        <li class="mode">
+          <span class="mode-text text">Тема</span>
+          <div class="toggle-switch">
+            <span class="switch"></span>
+          </div>
+        </li>
+      </div>
+
+  </ul>
+</div>
+
+  <!-- header -->
+  <section class="naruto">
+    <header class="head_nav">
+      <div class="topnavbar">
+
+      <div class="navbar-logo">
+        <a href="/">
+          <h4>Сyber<span>Sport</span></h4>
+        </a>
+      </div>
+    
+      <div class="input-box">
+        <i class='bx bx-search' ></i>
+        <input type="text" placeholder="Поиск..">
+    </div>
+
+    <% if(!user) {%>
+      <div class="login">
+        <a href="/reg" >Войти</a>
+      </div>
+      <% } %>
+      <% if(user) {%>
+        <div class="login">
+          <a href="/profile" >Профиль</a>
+        </div>
+        <% } %>
+
+    </div>
+
+</header>
+
+
+  <!-- Main -->
+  <div class="navigate_news">
+    <span><a href="/categorys">Категории</a> => <a href="/news:1:1">Странциа подтверждения</a></span>
+  </div>
+  
+  <div class="table-verification">
+    <h1>Страница подтверждения</h1>
+  </div>
+  
+  <div class="container-new-news">
+    <%newsVerify.forEach(({dataValues:{id,title,text,pictures,writed,userPost}})=>{%>
+
+      <div class="table-row">
+      <div class="table_row_id">
+        <span><%=id%></span>
+      </div>
+  
+      <div class="status-columnImg centers categoryImages">
+        <a href="#pexels-photo">
+        <div class="centers categoryImages1" style="background-image: url('/images:<%=pictures%>');"></div>
+      </a>
+      <a id="pexels-photo" href="#" class="full" style="background-image: url('/images:<%=pictures%>');"></a>
+    </div>
+  
+  
+      <div class="subjects-description status-column">
+        
+        <div class="chat-manager-users">
+  
+          <div class="chat-manager-users-item">
+          <span class="text-users-item-id"><%=id%></span>
+  
+          <input class="news_item_title" type="text" value="<%=title%>" required readonly>
+  
+          <textarea class="news_item_text" name="text" type="text"  rows="2" required readonly><%=text%></textarea>
+  
+      </div>
+      
+    </div>
+    
+    <div class="over-buttons">
+    <div class="over-buttons-verification">
+      <a href="#">
+      <button type="submit">Подтвердить<i class="bx bx-check"></i></button>
+    </a>
+    </div>
+
+    <div class="over-btndel-verification">
+      <a href="#">
+      <button type="submit">Удалить<i class="bx bx-x"></i></button>
+    </a>
+    </div>
+
+  </div>
+  
+      </div>
+  
+      <div class="replies-stats status-column">
+        <div class="comlike-verification">
+        
+          <div class="like-like" id="numberLike">
+            <span class="like-users-item-id">1</span>
+
+              <button class="photos__like-icon" type="button"><i class='bx bx-like'></i></button>
+ 
+            <input class="text-like-input" type="text" id="number" value="0" required readonly>
+          </div>
+        
+          <div class="comm-comm" id="numberComm">
+            <span class="comm-users-item-id">1</span>
+            <button class="photos__like-icon" type="button"><i class='bx bx-message-square-add'></i></button>
+            <input class="text-like-input" type="text" id="number" value="0" required readonly>
+        </div>
+    
+          <div class="show-show" id="numberShow">
+            <span class="show-users-item-id">1</span>
+            <button class="photos__like-icon" type="button"><i class='bx bx-show'></i></button>
+            <input class="text-like-input" type="text" id="number" value="0" required readonly>
+        </div>
+  
+        </div>
+      </div>
+  
+      <div class="last-info  status-column">
+        <div class="card__footer">
+          <div class="user">
+            <a href="/profile:<%=userPost.id%>"><img src="/images:<%=userPost.picturepath%>" class="user__image"></a>
+            <div class="user__info">
+             <a href="/profile:<%=userPost.id%>"><%=userPost.name%></a> 
+            </div>
+  
+            <small><%=writed%></small>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%})%>
+  </div>
+
+
+
+
+  <div class="btn-up btn-up_hide"></div>
+<!-- Footer -->
+<footer class="fo-end">
+    <span>&copy;2023 Pinocchio</span>
+  </footer>
+  
+  </section>
+  <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="js/preloader.js"></script>
+  <script src="js/header.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/scroll.js"></script>
+  <script src="js/verificatinbutton.js"></script>
+  <script src="js/topscroll.js"></script>
+  </body>
+  </html>

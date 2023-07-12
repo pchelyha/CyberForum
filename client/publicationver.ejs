@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSpForum</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css">
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+</head>
+<!-- <body class="prof_body "> -->
+  <%if(darkTema){%>
+    <body class="prof_body dark">
+    <%}%>
+    <%if(!darkTema){%>
+      <body class="prof_body">
+      <%}%>
+
+  <!-- Page Preloder -->
+  <div id="preloder">
+    <div class="loader"></div>
+  </div>
+
+  <div class="container">
+    <div class="unknown-error-container">
+      <div class="unknown-error-title">
+        <span>Вашу новость опубликуют после проверки</span>
+      </div>
+      
+      <div class="next_news_btn">
+        <a href="/categorys">Вернуться</a>
+      </div>
+    </div>
+  </div>
+  <div class="btn-up btn-up_hide"></div>
+
+  <script src="js/preloader.js"></script>
+  <script src="js/dropdownfilters.js"></script>
+<script src="js/topscroll.js"></script>
+</body>
+</html>

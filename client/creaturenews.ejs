@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSpForum</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css">
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+</head>
+<%if(darkTema){%>
+  <body class="dark">
+  <%}%>
+  <%if(!darkTema){%>
+    <body>
+    <%}%>
+ <!-- Page Preloder -->
+ <div id="preloder">
+  <div class="loader"></div>
+</div>
+
+<!-- header2 -->
+
+<div class="sidebar">
+  <div class="sidebar-brand">
+      <!-- <i class='bx bx-menu' id="btn" ></i> -->
+      <i class='bx bx-chevron-right toggle'></i>
+  </div>
+
+  <ul class="sidebar-list">
+    
+      <li>
+          <a href="/profile">
+            <i class='bx bx-user'></i>
+              <span class="sidebar-link-name">Профиль</span>
+          </a>
+              <span class="tooltip">Профиль</span>
+      </li>
+
+      <li>
+        <a href="/">
+              <i class='bx bx-home-alt'></i>
+              <span class="sidebar-link-name">Главная</span>
+          </a>
+          <span class="tooltip">Главная</span>
+      </li>
+
+      <li>
+          <a href="/categorys">
+              <i class='bx bx-news' ></i>
+              <span class="sidebar-link-name">Категории</span>
+          </a>
+          <span class="tooltip">Категории</span>
+      </li>
+
+      <li>
+          <a href="/">
+              <i class='bx bx-phone' ></i>
+              <span class="sidebar-link-name">О нас</span>
+          </a>
+          <span class="tooltip">О нас</span>
+      </li>
+
+
+      <li>
+        <a href="mypost.html">
+            <i class='bx bx-edit-alt'></i>
+            <span class="sidebar-link-name">Ваши новости</span>
+        </a>
+        <span class="tooltip">Ваши новости</span>
+    </li>
+
+      <li>
+          <a href="/addpost">
+              <i class='bx bx-plus-circle' ></i>
+              <span class="sidebar-link-name">Создать новость</span>
+          </a>
+          <span class="tooltip">Создать новость</span>
+      </li>
+     
+
+
+      <div class="bottom-content">
+        <li class="mode">
+          <span class="mode-text text">Тема</span>
+          <div class="toggle-switch">
+            <span class="switch"></span>
+          </div>
+        </li>
+      </div>
+
+  </ul>
+</div>
+
+<!-- header -->
+<section class="naruto">
+  <header class="topnavbar">
+    <div class="navbar-logo">
+      <a href="/">
+        <h4>Сyber<span>Sport</span></h4>
+      </a>
+    </div>
+    <% if(!user) {%>
+      <div class="login">
+        <a href="/reg" >Войти</a>
+      </div>
+      <% } %>
+      <% if(user) {%>
+        <div class="login">
+          <a href="/profile" >Профиль</a>
+        </div>
+        <% } %>
+  </div>
+</header>
+
+
+
+  <!-- Form News -->
+
+  <div class="container_forma">
+    <form action="/addpost" method="post" enctype="multipart/form-data">
+      
+      <div class="news_form_foto">
+
+        <label for="fname"><h1>Фото новости</h1></label>
+
+        <div class="news-cart-photo">
+          <img id="blah" src="#"/>
+        </div>
+
+        <div class="news_form_failfoto">
+         
+          <label for="load-file" class="load-file-label">Выберите фото</label>
+           <input type="file" name="image" id="load-file" multiple onchange="readURL(this);" />
+
+          </div>
+
+      </div>
+
+      <div class="news_forma_tema">
+        <label for="lname"><h1>Тема</h1></label>
+        <input type="text" id="lname" name="newsTitle" placeholder="Введите тему">
+      </div>
+
+      <div class="news_forma_cat">
+        <label for="country"><h1>Категория</h1></label>
+        <select id="country" name="newsCategorys" placeholder="Выберите категорию" >
+          <option selected="true" disabled="disabled">Выберите категорию</option>
+          <%categorys.forEach(({dataValues:{category_name,category_id}})=>{%>
+          <option>
+            <span><%=category_id%>;</span>
+            <%=category_name%></option>
+          <%})%>
+        </select>
+      </div>
+
+      <div class="news_forma_comm">
+        <label for="subject"><h1>Сообщение</h1></label>
+        <textarea id="subject" name="newsMessage" placeholder="Введите сообщение к новости..." style="height:160px"></textarea>
+      </div>
+
+      <%if(noticed){%>
+      <div class="incorrect-text">
+        
+            <div class="no-texts-news">
+          <span id="mydiv7"><%=noticed%></span>
+        </div>
+      </div>
+    <%}%>
+
+      <div class="next_news_btn">
+        <button type="submit">Отправить</button>
+      </div>
+
+    </form>
+  </div>
+
+
+  <div class="btn-up btn-up_hide"></div>
+
+
+
+  <footer class="fo-end">
+    <span>&copy;2023 Pinocchio</span>
+  </footer>
+
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="js/carusel.js"></script>
+<script src="js/footer.js"></script>
+<script src="js/preloader.js"></script>
+<script src="js/scroll.js"></script>
+<script src="js/header.js"></script>
+<script src="js/dropdownfilters.js"></script>
+<script src="js/topscroll.js"></script>
+<script src="js/reloadImg.js"></script>
+</body>
+
+</html>

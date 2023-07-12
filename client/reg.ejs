@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Регистрация</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/reg.css">
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+</head>
+<%if(darkTema){%>
+  <body class="dark">
+  <%}%>
+  <%if(!darkTema){%>
+    <body>
+    <%}%>
+  <!-- Page Preloder -->
+  <div id="preloder">
+    <div class="loader"></div>
+  </div>
+
+  <!-- header -->
+  <header class="topnavbar">
+    <div class="navbar-logo">
+      <a href="/">
+        <h4>Сyber<span>Sport</span></h4>
+      </a>
+    </div>
+
+  </header>
+
+  
+  <!-- Main -->
+  <main class="registration">
+    <div class="container-reg" id="container-reg">
+      <div class="form-container sign-up-container">
+        <form class="zxc" method="post" action="/reg">
+          <h1>Регистрация</h1>
+          <input type="text" name="name" placeholder="Имя" />
+          <input type="email" name="email" placeholder="почта" />
+          <input type="password" name="password" placeholder="пароль" />
+
+          <div class="incorrect-text">
+            <%if(failer){%>
+            <div class="no-data">
+              <span id="mydiv2"><%=failer%></span>
+            </div>
+            <%}%>
+          </div>
+
+          <div class="botnes">
+            <button>Продолдить</button>
+          </div>
+          
+        </form>
+      </div>
+      <div class="form-container sign-in-container">
+        <form  class="zxc" action="/auth" method="post">
+          <h1>Авторизация</h1>
+          <input type="email" name="email" placeholder="почта" />
+          <input type="password"  name="password" placeholder="пароль" />
+
+          <div class="incorrect-text">
+            <%if(failer){%>
+          <div class="no-data">
+            <span id="mydiv"><%=failer%></span>
+          </div>
+          <%}%>
+        </div>
+
+          <div class="nopassword">
+            <a href="/forgotpass">Забыли пароль?</a>
+          </div>
+          
+          <div class="botnes">
+            <button type="submit">Войти</button>
+          </div>
+
+        </form>
+      </div>
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="overlay-panel overlay-left">
+            <h1>Добро пожаловать</h1>
+            <p>Уже есть аккаунт?</p>
+            <button class="ghost" id="signIn">авторизация</button>
+          </div>
+          <div class="overlay-panel overlay-right">
+            <h1>С возвращением</h1>
+            <p>Ещё не зарегестрировались?</p>
+            <button class="ghost" id="signUp">регистрация</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="fo-end">
+    <span>&copy;2023 Pinocchio</span>
+  </footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="js/preloader.js"></script>
+  <script src="js/regestartion.js"></script>
+  <script src="js/header.js"></script>
+
+</body>
+</html>

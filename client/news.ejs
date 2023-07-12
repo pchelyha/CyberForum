@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSpForum</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/newsstyle.css">
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+</head>
+<%if(darkTema){%>
+  <body class="dark">
+  <%}%>
+  <%if(!darkTema){%>
+    <body>
+    <%}%>
+  <!-- Page Preloder -->
+ <div id="preloder">
+  <div class="loader"></div>
+</div>
+
+    <!-- delete-window -->
+    <div class="delete-window delete-window-hidden " id="delete-window">
+      <div class="delete-window-title">
+          <span>Удалить?</span>
+      </div>
+
+      <div class="delete-window-buttons">
+          <button class="delete-window-button windows" type="submit">Нет</button>
+          <button class="delete-window-button windows1" type="submit">Да</button>
+      </div>
+  </div>
+
+<!-- header2 -->
+
+<div class="sidebar">
+  <div class="sidebar-brand">
+      <!-- <i class='bx bx-menu' id="btn" ></i> -->
+      <i class='bx bx-chevron-right toggle'></i>
+  </div>
+
+  <ul class="sidebar-list">
+    
+      <li>
+          <a href="/profile">
+            <i class='bx bx-user'></i>
+              <span class="sidebar-link-name">Профиль</span>
+          </a>
+              <span class="tooltip">Профиль</span>
+      </li>
+
+      <li>
+        <a href="/">
+              <i class='bx bx-home-alt'></i>
+              <span class="sidebar-link-name">Главная</span>
+          </a>
+          <span class="tooltip">Главная</span>
+      </li>
+
+      <li>
+          <a href="/categorys">
+              <i class='bx bx-news' ></i>
+              <span class="sidebar-link-name">Категории</span>
+          </a>
+          <span class="tooltip">Категории</span>
+      </li>
+
+      <li>
+          <a href="/">
+              <i class='bx bx-phone' ></i>
+              <span class="sidebar-link-name">О нас</span>
+          </a>
+          <span class="tooltip">О нас</span>
+      </li>
+
+
+      <li>
+        <a href="mypost.html">
+            <i class='bx bx-edit-alt'></i>
+            <span class="sidebar-link-name">Ваши новости</span>
+        </a>
+        <span class="tooltip">Ваши новости</span>
+    </li>
+
+      <li>
+          <a href="/addpost">
+              <i class='bx bx-plus-circle' ></i>
+              <span class="sidebar-link-name">Создать новость</span>
+          </a>
+          <span class="tooltip">Создать новость</span>
+      </li>
+     
+
+
+      <div class="bottom-content">
+        <li class="mode">
+          <span class="mode-text text">Тема</span>
+          <div class="toggle-switch">
+            <span class="switch"></span>
+          </div>
+        </li>
+      </div>
+
+  </ul>
+</div>
+
+<!-- header -->
+<section class="naruto">
+
+  <header class="topnavbar">
+
+    <div class="navbar-logo">
+      <a href="/">
+        <h4>Сyber<span>Sport</span></h4>
+      </a>
+    </div>
+    
+    <div class="input-box">
+      <i class='bx bx-search' ></i>
+      <input type="text" placeholder="Поиск..">
+  </div>
+
+  <%if(user){%>
+    <%if(user.role=='Администратор'){%>
+        <div class="category-header-buttons category_newnews_button">
+          <a href="/addCategory">
+          <button type="submit"><span>Добавить категорию</span><i class='bx bx-plus-circle'></i></button>
+        </a>
+        </div>
+    <%}%>
+    <%}%>
+
+
+    <% if(!user) {%>
+      <div class="login">
+        <a href="/reg" >Войти</a>
+      </div>
+      <% } %>
+      <% if(user) {%>
+        <div class="login">
+          <a href="/profile" >Профиль</a>
+        </div>
+        <% } %>
+    
+  </div>
+</header>
+  
+
+<!-- News -->
+
+<div class="container-news">
+  <div class="subforum-title">
+    <h1>Категории</h1>
+  </div>
+  <%var allPosts=0%>
+  <%var allCategorys=0%>
+    <%categorys.forEach(({dataValues:{category_id,category_img,category_name,category_text,post_category}})=>{%>
+      <div class="subforum-row">
+        <%allCategorys++%>
+
+        <div class="table_forums_id">
+          <span><%=category_id%></span>
+        </div>
+
+        <div class="subforum-columnImg center categoryImages">
+        <a href="#pexels-photo">
+        <div class="center categoryImages1" style="background-image: url(/images:<%=category_img%>);"></div>
+      </a>
+      <a id="pexels-photo" href="#" class="full" style="background-image: url(/images:<%=category_img%>);"></a>
+    </div>
+  
+        <div class="subforum-description subforum-column">
+
+          <div class="chat-manager-users">
+
+            <div class="chat-manager-users-item">
+            <span class="text-category-item-id">1</span>
+            <input class="news_item_title" type="text" value="<%=category_name%>" required readonly>
+      
+            <textarea class="news_item_text" name="text" type="text"  rows="15" required readonly><%=category_text%></textarea>
+
+          </div>
+          
+        </div>
+
+            <div class="btn-news-verification">
+
+            <div class="category-buttons-forum">
+              <a href="/news:<%=category_id%>:1">
+              <button type="submit">Перейти<i class="bx bx-up-arrow-alt"></i></button>
+            </a>
+            </div>
+            <%if(user.role=='Администратор'){%>
+            <div class="category-buttons-forum">
+              <a href="/verifyNews:<%=category_id%>">
+              <button type="submit">Проверить<i class="bx bx-up-arrow-alt"></i></button>
+            </a>
+            </div>
+            <%}%>
+          </div>
+
+        </div>
+        <% var count =0 %>
+        <% var latestPost%>
+        <%post_category.forEach(({dataValues:{writed,status}},index)=>{%>
+          <%if(!latestPost && status =="Проверено"){%>
+              <%latestPost=writed %>
+            <%}%>
+            <%if(status=='Проверено'){%>
+              <%count++%>
+              <%allPosts++%>
+           <%}%>
+
+        <%})%>
+  
+        <div id="news_quantity" class="subforum-stats subforum-column center">
+          <span><%=count%> обсуждений</span>
+        </div>
+  
+        <div class="subforum-info">
+        <div class="qwe123">
+          <span>Последнее добавленее</span>
+          <span id="news_subforum_date"><%=latestPost%></span>
+        </div>
+
+        <%if(user){%>
+          <%if(user.role=='Администратор'){%>
+          <div class="news-delete-item-title">
+            <i class='bx bx-trash'></i>
+        </div>
+
+        <div class="news-edit-item-title">
+          <i class='bx bx-edit-alt'></i>
+      </div>
+      <%}%>
+      <%}%>
+        </div>
+  
+      </div>
+  
+
+    <%})%>
+    
+</div>
+
+<!-- Forum Info -->
+<div class="forum-info">
+
+  <div class="chart-status">
+   Форум статус &nbsp;<i class="fa fa-bar-chart"></i>
+ </div>
+
+ <span><u><%=allPosts%></u> Постов <br><u><%=allCategorys%></u> Тем <u><br><%=numbOfUsers%></u> Участников </span>
+</div>
+
+<footer class="fo-end">
+  <span>&copy;2023 Pinocchio</span>
+</footer>
+
+<div class="btn-up btn-up_hide"></div>
+
+</section>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.3.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="js/preloader.js"></script>
+<script src="js/header.js"></script>
+<script src="js/news.js"></script>
+<script src="js/categoryedit.js"></script>
+<script src="js/dropdownfilters.js"></script>
+<script src="js/topscroll.js"></script>
+<script src="js/search.js"></script>
+
+</body>
+</html>
+

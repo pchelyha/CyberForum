@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSpForum</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css">
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+</head>
+<%if(darkTema){%>
+  <body class="dark">
+  <%}%>
+  <%if(!darkTema){%>
+    <body>
+    <%}%>
+ <!-- Page Preloder -->
+ <div id="preloder">
+  <div class="loader"></div>
+</div>
+
+<!-- header2 -->
+
+<div class="sidebar">
+  <div class="sidebar-brand">
+      <!-- <i class='bx bx-menu' id="btn" ></i> -->
+      <i class='bx bx-chevron-right toggle'></i>
+  </div>
+
+  <ul class="sidebar-list">
+    
+      <li>
+          <a href="/profile">
+            <i class='bx bx-user'></i>
+              <span class="sidebar-link-name">Профиль</span>
+          </a>
+              <span class="tooltip">Профиль</span>
+      </li>
+
+      <li>
+        <a href="/">
+              <i class='bx bx-home-alt'></i>
+              <span class="sidebar-link-name">Главная</span>
+          </a>
+          <span class="tooltip">Главная</span>
+      </li>
+
+      <li>
+          <a href="/categorys">
+              <i class='bx bx-news' ></i>
+              <span class="sidebar-link-name">Категории</span>
+          </a>
+          <span class="tooltip">Категории</span>
+      </li>
+
+      <li>
+          <a href="#about">
+              <i class='bx bx-phone' ></i>
+              <span class="sidebar-link-name">О нас</span>
+          </a>
+          <span class="tooltip">О нас</span>
+      </li>
+
+
+      <li>
+        <a href="/postAuthor:<%=user.id%>">
+            <i class='bx bx-edit-alt'></i>
+            <span class="sidebar-link-name">Ваши новости</span>
+        </a>
+        <span class="tooltip">Ваши новости</span>
+    </li>
+
+      <li>
+          <a href="/addpost">
+              <i class='bx bx-plus-circle' ></i>
+              <span class="sidebar-link-name">Создать новость</span>
+          </a>
+          <span class="tooltip">Создать новость</span>
+      </li>
+     
+
+
+      <div class="bottom-content">
+        <li class="mode">
+          <span class="mode-text text">Тема</span>
+          <div class="toggle-switch">
+            <span class="switch"></span>
+          </div>
+        </li>
+      </div>
+
+  </ul>
+</div>
+
+<!-- header -->
+<section class="naruto">
+  <header class="topnavbar">
+    <div class="navbar-logo">
+      <a href="/">
+        <h4>Сyber<span>Sport</span></h4>
+      </a>
+    </div>
+    <% if(!user) {%>
+    <div class="login">
+      <a href="/reg" >Войти</a>
+    </div>
+    <% } %>
+    <% if(user) {%>
+      <div class="login">
+        <a href="/profile" >Профиль</a>
+      </div>
+      <% } %>
+  </div>
+</header>
+
+<!-- Menu -->
+
+<carusel>
+  
+  <div class="latest">
+    <h1>Категории</h1>
+  </div>
+
+  <section class="game-section">
+    <div class="owl-carousel custom-carousel owl-theme">
+       <%categorys.forEach(({dataValues:{category_id,category_img,category_name,category_text}})=>{%>
+        <div class="item" style="background-image: url(/images:<%=category_img%>);">
+          <a href="/news:<%=category_id%>:1" class="item-desc">
+            <h3><%=category_name%></h3>
+          </a>
+        </div>
+        <%})%> 
+    </div>
+  </div>
+</section>
+</carusel>
+
+<!-- Main -->
+<main>
+  <div class="latest">
+    <h1>Последние Новости</h1>
+  </div>
+
+  <div class="band">
+    <%latestPosts.forEach(({dataValues:{id,post_category,pictures,title}})=>{%>
+      <div class="item-1">
+        <div class="band_item_id">
+          <span><%=id%></span>
+        </div>
+        <a href="/posts:<%=id%>" class="chart">
+          <div class="thumb" style="background-image: url(/images:<%=pictures%>);"></div>
+          <article>
+
+            <div class="chat-manager-users-item">
+            <input class="news_item_title" type="text" value="<%=post_category.category_name%>" required readonly>
+            <input class="news_item_title" type="text" value="<%=title%>" required readonly>
+          </div>
+          
+          </article>
+        </a>
+      </div>
+
+    <%})%>
+  </div>
+    
+</main>
+
+
+<!-- Footer -->
+<footer id="about" class="page-footer">
+  <div class="latest">
+    <h1>О нас</h1>
+  </div>
+  <section>
+    
+    <div class="contact-wrapper">
+      
+      <!-- Left contact page -->
+      
+      <form class="form-horizontal" action="/feedback" method="post">
+        <h1 class="section-header">Напишите нам</h1>
+        <div class="form-group">
+          <div class="name-about">
+            <input type="text" class="form-control" id="name" placeholder="Имя" name="name" value="" required>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="email-about">
+            <input type="email" class="form-control" id="email" placeholder="Почта" name="email" value="" required>
+          </div>
+        </div>
+        
+        <textarea class="form-control"  placeholder="Сообщение" name="message" required></textarea>
+        <br>
+
+
+          <div class="about-buttons">
+            <button type="submit">Отправить</button>
+          </div>
+
+        
+      </form>
+      
+      <!-- Left contact page -->
+      
+      <div class="direct-contact-container">
+        
+        <ul class="contact-list">
+          <h1 class="section-header">Наши контакты</h1>
+          <div class="phone_mail">
+          <li class="list-item"><i class="bx bx-phone-call"><span class="contact-text phone"><a href="tel:+79991393306" title="Give me a call">89991393306</a></span></i></li>
+          
+          <li class="list-item"><i class="bx bxl-gmail"><span class="contact-text gmail"><a href="https://e.mail.ru/inbox/" title="Send me an email">pchelyha@mail.ru</a></span></i></li>
+        </div>
+        </ul>
+
+        <hr>
+        <ul class="social-media-list">
+          <li><a href="https://github.com/pchelyha" target="_blank" class="contact-icon">
+            <i class="bx bxl-github" aria-hidden="true"></i></a>
+          </li>
+          <li><a href="https://vk.com/pchelyha" target="_blank" class="contact-icon">
+            <i class="bx bxl-vk" aria-hidden="true"></i></a>
+          </li>
+          <li><a href="https://t.me/phelyha" target="_blank" class="contact-icon">
+            <i class="bx bxl-telegram" aria-hidden="true"></i></a>
+          </li>
+          <li><a href="#" target="_blank" class="contact-icon">
+            <i class="bx bxl-instagram" aria-hidden="true"></i></a>
+          </li>
+          <hr>
+          
+          <div class="copyright">&copy;2023 pinocchio</div>
+        </ul>
+
+      </div>
+      
+    </div>
+    
+  </section>
+</footer>
+
+<div class="btn-up btn-up_hide"></div>
+</section>
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="js/carusel.js"></script>
+<script src="js/footer.js"></script>
+<script src="js/preloader.js"></script>
+<script src="js/scroll.js"></script>
+<script src="js/header.js"></script>
+<script src="js/dropdownfilters.js"></script>
+<script src="js/topscroll.js"></script>
+</body>
+
+</html>

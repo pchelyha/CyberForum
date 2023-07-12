@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSpForum</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/newsstyle.css">
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+</head>
+<%if(darkTema){%>
+  <body class="dark">
+  <%}%>
+  <%if(!darkTema){%>
+    <body>
+    <%}%>
+
+   <!-- No texts -->
+   <div class="no-text-open ne-texts-hidden" id="no-text-open">
+    <div class="no-text-open-title">
+        <span>Заполните данные</span>
+    </div>
+
+    <div class="no-text-button">
+      <button type="submit">Хорошо</button>
+    </div>
+
+</div>
+
+ <!-- Page Preloder -->
+ <div id="preloder">
+  <div class="loader"></div>
+</div>
+
+    <!-- delete-window -->
+    <div class="delete-window delete-window-hidden " id="delete-window">
+      <div class="delete-window-title">
+          <span>Удалить?</span>
+      </div>
+
+      <div class="delete-window-buttons">
+          <button class="delete-window-button windows" type="submit">Нет</button>
+          <button class="delete-window-button windows1" type="submit">Да</button>
+      </div>
+  </div>
+
+<!-- header2 -->
+
+<div class="sidebar">
+  <div class="sidebar-brand">
+      <!-- <i class='bx bx-menu' id="btn" ></i> -->
+      <i class='bx bx-chevron-right toggle'></i>
+  </div>
+
+  <ul class="sidebar-list">
+    
+      <li>
+          <a href="/profile">
+            <i class='bx bx-user'></i>
+              <span class="sidebar-link-name">Профиль</span>
+          </a>
+              <span class="tooltip">Профиль</span>
+      </li>
+
+      <li>
+        <a href="/">
+              <i class='bx bx-home-alt'></i>
+              <span class="sidebar-link-name">Главная</span>
+          </a>
+          <span class="tooltip">Главная</span>
+      </li>
+
+      <li>
+          <a href="/categorys">
+              <i class='bx bx-news' ></i>
+              <span class="sidebar-link-name">Категории</span>
+          </a>
+          <span class="tooltip">Категории</span>
+      </li>
+
+      <li>
+          <a href="/">
+              <i class='bx bx-phone' ></i>
+              <span class="sidebar-link-name">О нас</span>
+          </a>
+          <span class="tooltip">О нас</span>
+      </li>
+
+
+      <li>
+        <a href="mypost.html">
+            <i class='bx bx-edit-alt'></i>
+            <span class="sidebar-link-name">Ваши новости</span>
+        </a>
+        <span class="tooltip">Ваши новости</span>
+    </li>
+
+      <li>
+          <a href="/addpost">
+              <i class='bx bx-plus-circle' ></i>
+              <span class="sidebar-link-name">Создать новость</span>
+          </a>
+          <span class="tooltip">Создать новость</span>
+      </li>
+     
+
+
+      <div class="bottom-content">
+        <li class="mode">
+          <span class="mode-text text">Тема</span>
+          <div class="toggle-switch">
+            <span class="switch"></span>
+          </div>
+        </li>
+      </div>
+
+  </ul>
+</div>
+
+<!-- header -->
+<section class="naruto">
+  <header class="topnavbar">
+    <div class="navbar-logo">
+      <a href="/">
+        <h4>Сyber<span>Sport</span></h4>
+      </a>
+    </div>
+    <% if(!user) {%>
+      <div class="login">
+        <a href="/reg" >Войти</a>
+      </div>
+      <% } %>
+      <% if(user) {%>
+        <div class="login">
+          <a href="/profile" >Профиль</a>
+        </div>
+        <% } %>
+  </div>
+</header>
+  
+
+<!-- News -->
+
+<!--Navigation-->
+<div class="container-new-active">
+
+<div class="container-new-active-com-tema">
+
+  <!--Section-->
+    <div class="head-zovs">
+      <div class="authors">Новость</div>
+    </div>
+
+    <div class="activ1" id="news-top-comm">
+      <div class="news-top_id">
+        <span><%=post.id%></span>
+      </div>
+      <div class="body-news-activ">
+        
+        <div class="authors_infa">
+
+          <div class="active-news-img center categoryImages">
+            <a href="#pexels-photo">
+            <div class="center categoryImages1" style="background-image: url(/images:<%=post.pictures%>);"></div>
+          </a>
+          <a id="pexels-photo" href="#" class="full" style="background-image: url(/images:<%=post.pictures%>);"></a>
+        </div>
+
+          <div class="last-info-com">
+            <div class="card__footer">
+              <div class="users">
+                <a href="/profile:<%=post.userPost.dataValues.id%>"><img src="/images:<%=post.userPost.dataValues.picturepath%>" class="user__image"></a>
+                <div class="users__info">
+                  <a href="/profile:<%=post.userPost.dataValues.id%>"><%=post.userPost.dataValues.name%></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <%var likesCount=0%>
+          <%var viewsCount=0%>
+        <%var isLiked=false%>
+        <%post.news_likes.forEach(({dataValues:{like_id,post_id,user_id}})=>{%>
+          <%likesCount += 1%>
+          <%viewsCount += 1%>
+          <%if(post_id==post.id&&user.id==user_id) isLiked=true%>
+        <%})%>
+
+          <div class="replies-stuts">
+            <div class="comlike-com">
+
+              <div class="like-like-com" id="numberLike">
+                <span class="like-users-item-id"><%=post.id%></span>
+                <%if(isLiked){%>
+                  <button class="photos__like-icon" type="button" style="color: rgb(222, 64, 64);"><i class='bx bxs-like'></i></button>
+                <%}%>
+                <%if(!isLiked){%>
+                  <button class="photos__like-icon" type="button"><i class='bx bx-like'></i></button>
+                <%}%>
+                <input class="text-like-input" type="text" id="number" value="<%=likesCount%>" required readonly>
+              </div>
+              <%var commentsCount=0%>
+              <%comments.forEach(()=>{%>
+                <%commentsCount+=1%>
+              <%})%>
+              <div class="comm-comm" id="numberComm">
+                <span class="comm-users-item-id">1</span>
+              <a href="newspostactive.html">
+                <button class="photos__like-icon" type="button"><i class='bx bx-message-square-add'></i></button>
+              </a>
+                <input class="text-like-input" type="text" id="number" value="<%=commentsCount%>" required readonly>
+            </div>
+      
+              <div class="show-show" id="numberShow">
+                <span class="show-users-item-id">1</span>
+                <button class="photos__like-icon" type="button"><i class='bx bx-show'></i></button>
+                <input class="text-like-input" type="text" id="number" value="<%=post.views%>" required readonly>
+            </div>
+            <small><%=post.writed%></small>
+            </div>
+          </div>
+        </div>
+
+        <div class="content">
+
+          <div class="chat-manager-users">
+
+            <div class="chat-manager-users-item">
+            <span class="text-users-item-id">1</span>
+    
+            <input class="news_item_title" type="text" value="<%=post.title%>" required readonly>
+    
+            <textarea class="news_item_text" name="text" type="text"  rows="2" required readonly><%=post.text%></textarea>
+    
+        </div>
+        
+      </div>
+
+          <div class="comment">
+            <div class="news-detals-buttons news_comments_button">
+              <a href="#add-new-com-news">
+              <button type="submit">Написать комментарий<i class='bx bx-comment-dots'></i></button>
+              </a>
+            </div>
+            <div class="comments_butn_back">
+            <input
+                action="action"
+                onclick="window.history.go(-1); return false;"
+                type="submit"
+                value="Назад"
+            />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!--Comments Section-->
+  
+<div class="comments-container1" id="news-top_com">
+  <div class="head-zov">
+    <div class="authors">Комментарии</div>
+  </div>
+  <%comments.forEach(({dataValues:{user_comments,comment_text,comment_date,comment_id,comment_likes}})=>{%>
+    <%commentsCount+=1%>
+    <%var likeCommentCount=0%>
+    <%var isLikedComm=false%>
+    <%comment_likes.forEach(({dataValues})=>{%>
+      <%likeCommentCount++%>
+      <%if(comment_id==dataValues.comment_id&&user.id==dataValues.user_id) isLikedComm=true%>
+    <%})%>
+      <div class="body-news-activ_coms">
+
+        <div class="news-top_com_id">
+          <span><%=comment_id%></span>
+        </div>
+
+        <div class="authors_infa">
+          <div class="last-info-com">
+            <div class="card__footer">
+              <div class="users">
+                <a href="/profile:<%=post.userPost.dataValues.id%>"><img src="/images:<%=user_comments.dataValues.picturepath%>" class="user__image"></a>
+                <div class="users__info">
+                  <a href="/profile:<%=user_comments.dataValues.id%>"><%=user_comments.dataValues.name%></a>
+              
+                </div>
+              </div>
+            </div>
+          </div>
+        
+          <div class="replies-stuts">
+            <div class="comlike-com">
+
+              <div class="like-like_com-com" id="numberLike">
+                <span class="like-com-users-item-id"><%=comment_id%></span>
+                <%if(isLikedComm){%>
+                  <button class="photos__like-icon" type="button" style="color: rgb(222, 64, 64);"><i class='bx bxs-like'></i></button>
+                <%}%>
+                <%if(!isLikedComm){%>
+                  <button class="photos__like-icon" type="button"><i class='bx bx-like'></i></button>
+                <%}%>
+                <input class="text-like-input" type="text" id="number" value="<%=likeCommentCount %>" required readonly>
+              </div>
+              <small><%=comment_date%></small>
+            </div>
+          </div>
+ 
+        </div>
+
+        <div class="content">
+
+
+          <div class="chat-manager-users">
+
+            <div class="chat-manager-users-item">
+              <textarea class="news_item_text" name="text" type="text"  rows="2" required readonly><%=comment_text%></textarea>
+        </div>
+      </div>
+      
+      <% if(user.id==user_comments.id||user.role=="Администратор"){ %>
+      <div class="news-delete-item-titles111">
+        <div class="news-delete-item-titles">
+          <i class='bx bx-trash'></i>
+      </div>
+
+      <div class="news-edit-item-titles">
+        <i class='bx bx-edit-alt'></i>
+    </div>
+  </div>
+  <% } %>
+
+        </div>
+      </div>
+  <%})%>
+</div>
+
+ <!-- comments-new -->
+ <section class="section-comments" id="add-new-com-news">
+  <div class="comments-container-centers">
+      <div class="add-new-com-news">
+          <div class="add-com-header">
+              <div class="add-com-header-text">
+                  <span>Напишите комментарий</span>
+              </div>
+          </div>
+
+          <div class="chat-manager-user">
+          <div class="news_forma_comm">
+            <textarea id="subject" name="newsMessage" placeholder="Сообщение.." style="height:140px"></textarea>
+          </div>   
+  </div>   
+
+          <div class="news-detals-buttons news_comments_button">
+            <button type="submit">Отправить</button>
+          </div>
+
+          </div>
+      </div>
+    </section>
+  </div>
+<div class="btn-up btn-up_hide"></div>
+
+<footer class="fo-end">
+  <span>&copy;2023 Pinocchio</span>
+</footer>
+</section>
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="js/preloader.js"></script>
+<script src="js/header.js"></script>
+<script src="js/newspostactive.js"></script>
+<script src="js/dropdownfilters.js"></script>
+<script src="js/topscroll.js"></script>
+<script src="js/scroll.js"></script>
+</body>
+</html>
